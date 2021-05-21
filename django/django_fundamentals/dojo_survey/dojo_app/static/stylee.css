@@ -1,0 +1,15 @@
+article {
+    margin-top: 100px;
+    margin-left: 100px;
+    background-color: rgba(180, 202, 207, 0.76);
+    width: max-content;
+    padding: 20px;
+    border: 5px solid black;
+}
+#inn {
+    margin-left: 120px;
+}
+#ss {
+    min-height: 70px;
+    min-width: 200px;
+}

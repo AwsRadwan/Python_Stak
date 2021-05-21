@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+        <link rel="stylesheet" href="{% static 'stylee.css' %}">
+    <title>Document</title>
+</head>
+<body>
+    <article>
+        <form action="/result" method="post">
+            {% csrf_token %}
+            <label for="your_name">Your Name :</label>
+            <input type="text" name="yo_na">
+            <br><br>
+            <label for="dojo_location">Dojo_Location:</label>
+            <select name="location" value="Palestine">
+                <option value="Palestine">Palestine</option>
+                <option value="Jordan">Jordan</option>
+                <option value="Egypt">Egypt</option>
+                <option value="Eorop">Eorop</option>
+                <option value="China">China</option>
+                <option value="Italy">Italy</option>
+            </select>
+            <br><br>
+            <label for="fl">Favorite Language:   </label>
+            <select name="fl" value="Python">
+            <option value="Python">Python</option>
+            <option value="java">java</option>
+            <option value="javascript">javascript</option>
+            <option value="C++">C++</option>
+            <option value="Css">Css</option>
+            </select>
+            <br><br>
+            <p>Please select your gender:</p>
+            <input type="radio" id="male" name="gender" value="male">
+            <label for="male">Male</label><br>
+            <input type="radio" id="female" name="gender" value="female">
+            <label for="female">Female</label><br>
+            <input type="radio" id="other" name="gender" value="other">
+            <label for="other">Other</label>
+            <br><br>
+            <label for="comment">Comment (optional):</label>
+            <br><br>
+            <textarea name="comment" id="ss">
+
+            </textarea>
+            <br><br>
+            <input type="submit" id="inn" value= "submit">
+        </form>
+    </article>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Submitted Info. :</h2>
+    <section>
+        <article>
+            <form action="/">
+            <p>Name: {{ request.session.yname }}</p>
+            <br>
+            <p>Dojo Location: {{ request.session.loc }}</p>
+            <br>
+            <p>Favorite Language: {{ request.session.fav }}</p>
+            <br>
+            <p>Gender: {{ request.session.gg }}</p>
+            <br>
+            <p>Comment: {{ request.session.com }}</p>
+            <br>
+            
+            <button href= '/' name="go">Go back</button>
+            </form>
+        </article>
+    </section>
+    <style>
+        body {
+            padding-top: 50px;
+            padding-left: 200px;
+        }
+        p {
+            width: fit-content;
+        }
+        h2 {
+            text-decoration: underline;
+        }
+        section {
+            display: flex;
+            background-color: antiquewhite;
+            padding: 30px;
+            justify-content: space-between;
+            width: 300px;
+            border: 5px solid black;
+        }
+        article {
+            flex: 1;
+            background-color: burlywood;
+            padding-left: 30px;
+            width: fit-content;
+            padding-bottom: 3px;
+        }
+        main {
+            flex: 1;
+        }
+    </style>
+</body>
+</html>

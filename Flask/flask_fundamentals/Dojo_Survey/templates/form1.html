@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <article>
+        <form action="/sub" method="post">
+            <label for="your_name">Your Name :</label>
+            <input type="text" name="your_name">
+            <br><br>
+            <label for="dojo_location">Dojo_Location:</label>
+            <select name="location" value="Palestine">
+                <option value="Palestine">Palestine</option>
+                <option value="Jordan">Jordan</option>
+                <option value="Egypt">Egypt</option>
+                <option value="Eorop">Eorop</option>
+                <option value="China">China</option>
+                <option value="Italy">Italy</option>
+            </select>
+            <br><br>
+            <label for="fl">Favorite Language:   </label>
+            <select name="fl" value="Python">
+            <option value="Python">Python</option>
+            <option value="java">java</option>
+            <option value="javascript">javascript</option>
+            <option value="C++">C++</option>
+            <option value="Css">Css</option>
+            </select>
+            <br><br>
+            <label for="comment">Comment (optional):</label>
+            <br><br>
+            <textarea name="comment" id="ss">
+
+            </textarea>
+            <br><br>
+            <input type="submit" id="inn" value= "submit">
+        </form>
+    </article>
+    <style>
+        article {
+            margin-top: 100px;
+            margin-left: 100px;
+            background-color: rgba(180, 202, 207, 0.76);
+            width: max-content;
+            padding: 20px;
+            border: 5px solid black;
+        }
+        #inn {
+            margin-left: 120px;
+        }
+        #ss {
+            min-height: 70px;
+            min-width: 200px;
+        }
+    </style>
+</body>
+</html>
