@@ -67,8 +67,9 @@
     </section>
     <br><br><br><br>
     <p>Activites: </p>
-    
-    <p> {{ request.session.list }} </p>
+    {% for tx in request.session.list %}
+    <p> {{ tx }} </p>
+    {% endfor %}
     <form action="/reset" method="POST">
         {% csrf_token %}
         <input type="submit" value="Reset">

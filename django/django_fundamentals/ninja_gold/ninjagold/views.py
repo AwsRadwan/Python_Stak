@@ -22,19 +22,19 @@ def goldcc(request):
                 return redirect('/')
             if request.POST['hidden'] == 'hidden2':
                 request.session['gold'] += random.randint(5, 10)
-                x = f'earned { request.session["gold"] } golds from the farm! { request.session["time"] }'
+                x = f'earned { request.session["gold"] } golds from the cave! { request.session["time"] }'
                 request.session['list'].append(x)
                 request.session.save()
                 return redirect('/')
             if request.POST['hidden'] == 'hidden3':
                 request.session['gold'] += random.randint(2, 5)
-                x = f'earned { request.session["gold"] } golds from the farm! { request.session["time"] }'
+                x = f'earned { request.session["gold"] } golds from the house! { request.session["time"] }'
                 request.session['list'].append(x)
                 request.session.save()
                 return redirect('/')
             if request.POST['hidden'] == 'hidden4':
                 request.session['gold'] += random.randint(-50, 50)
-                x = f'earned { request.session["gold"] } golds from the farm! { request.session["time"] }'
+                x = f'earned { request.session["gold"] } golds from the casino! { request.session["time"] }'
                 request.session['list'].append(x)
                 request.session.save()
                 return redirect('/')
