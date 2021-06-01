@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+        body {
+            background-color: rosybrown;
+            padding: 40px;
+        }
+        header {
+            height: 100px;
+
+        }
+        #log {
+            text-align: right;
+            float: right;
+            color: red;
+            font-size: 24px;
+            text-decoration: underline;
+        }
+        h4 {
+            color: seagreen;
+        }
+        #inn {
+            width: 200px;
+        }
+        #formm {
+            width: 800px;
+            display: flex;
+            justify-content: space-between;
+        }
+        #bb {
+            margin-left: 20px;
+        } 
+        .post {
+            width: 500px;
+            padding: 10px;
+            border: 2px solid black;
+        }
+        .pp {
+            width: 500px;
+        }
+        #count {
+            float: right;
+        }
+        #deta {
+            text-decoration: underline;
+        }
+        main {
+            display: flex;
+        }
+        .bott {
+            margin-left: 20px;
+        }
+
+
+    </style>
+    <title>Success</title>
+</head>
+<body>
+    <header>
+        <h1>Hi {{user.first_name}} {{user.last_name}} !!  <a id="log" href="/log_out"> Log_out </a></h1>
+        <br>
+        <form action="/add_post" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="post">
+            <div class="form-group" id="formm">
+                <input type="text" name="add_post" width="200px" aria-rowcount="2" class="form-control" id="exampleFormControlInput1" placeholder="Post a Great Thought Here!" required>
+                <button type="submit" id="bb" class="btn btn-primary">Add Thought</button>
+            </div>
+            {% if messages %}
+                <ul class="messages">
+                {% for message in messages %}    
+                    <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+                {% endfor %}
+                </ul>
+            {% endif %}
+        </form>
+    </header>
+    <br>
+    <hr>
+    <br>
+    <article>
+            {% for x in posts %}
+                <h4> {{ x.user.first_name }} says:</h4>
+                <main>
+                    <div class="pp">
+                        <p class="post"> {{x.post}} </p>
+                        <p><a href="/thoughts/{{x.id}}" id="deta">Details</a> <span id="count"> {{x.users_liked.all|length}} people like this</span></p>
+                    </div>
+                    <div class="bott">
+                    {% if x.user.id == request.session.id %} 
+                        <form action="/delete_p/{{x.id}}" method="POST" id="ff">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form> 
+                    {% endif %}
+                    </div>
+                </main>
+                <br>
+                <hr>
+                <br>
+            {% endfor %}
+    </article>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+        article {
+            display: flex;
+            padding: 20px;
+        }
+        section {
+            flex: 1;
+            padding: 20px;
+        }
+        header {
+            padding: 10px 40px;
+        }
+    </style>
+    <title>this_book</title>
+</head>
+<body>
+    <header>
+        <h1>Welcome, {{ request.session.fname }} {{ request.session.lname }} <a id="log" href="/logout">Log Out</a> </h1>
+    </header>
+    <article>
+        <section>
+            <h2> {{ book.title }} </h2>
+            <p>Added by: {{ book.uploaded_by.first_name }} {{ book.uploaded_by.last_name }} </p>
+            <p>Added on: {{ book.created_at }} </p>
+            <p>Last updated on: {{ book.updated_at }} </p>
+            {% if user.id == book.uploaded_by.id %}
+                <footer>
+                    <form action="/update/{{book.id}}" method="POST">
+                        {% csrf_token %}
+                        <p>Description: <input type="text" name="des" value="{{book.desc}}" aria-rowcount="3"></p>
+                        <button type="submit" class="btn btn-info">Update</button>
+                    </form>
+                    <form action="/delete/{{book.id}}" method="POST">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </footer>
+            {% else %}
+                <p>Description: {{ book.desc }} </p>
+            {% endif %}
+        </section>
+        <section>
+            <h2>users who like this book:</h2>
+            <ul>
+                {% for x in book.users_liked.all %}
+                    <li> {{x.first_name}} {{x.last_name}} {% if x.id == user.id %} <a href="/remove/{{book.id}}">Un-Favorite</a> {% endif %} </li>
+                {% endfor %}
+            </ul>
+            <br><br>
+            {% if book not in user.liked_books.all %} <a href="/add_fav/{{book.id}}">Add to Favorites</a> {% endif %}
+        </section>
+    </article>
+</body>
+</html>

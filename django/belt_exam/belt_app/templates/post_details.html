@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+        body {
+            background-color: rosybrown;
+            padding: 40px;
+        }
+        header {
+            display: flex;
+        }
+        article {
+            flex: 1;
+        }
+        section {
+            padding: 10px 50px;
+        }
+        section {
+            width: 600px;
+        }
+        table {
+            text-align: center;
+        }
+        .post {
+            width: 600px;
+            padding: 10px;
+            border: 2px solid black;
+        }
+        .pp {
+            width: 600px;
+        }
+        .bbb {
+            float: right;
+        }
+        #oo {
+            float: right;
+            font-size: 25px;
+        }
+        .zzz {
+            text-decoration: underline;
+        }
+    </style>
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <article class="pp">
+            <h4> {{ post.user.first_name }} says:</h4>
+                <div class="pp">
+                    <p class="post"> {{post.post}} </p>
+                    {% if post not in user.liked_posts.all %} 
+                        <form action="/like/{{post.id}}" method="POST" class="bbb">
+                            {% csrf_token %}
+                            <input type="hidden" name="like">
+                            <button type="submit" class="btn btn-success">Like</button>
+                        </form>
+                    {% else %}
+                        <form action="/dislike/{{post.id}}" method="POST" class="bbb">
+                            {% csrf_token %}
+                            <input type="hidden" name="dislike">
+                            <button type="submit" class="btn btn-danger">Unlike</button>
+                        </form>
+                    {% endif %}
+                </div>
+        </article>
+        <article>
+            <h3 id="oo"><a class="zzz" href="/thoughts">Dashboard</a> | <a class="zzz" href="/log_out">Log Out</a></h3>
+        </article>
+    </header>
+    <br><br><br>
+    <section>
+        <h4>People who like this thought:</h4>
+        <br><br>
+        <table class="table table-striped table-dark">
+            <thead>
+                <tr>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for x in post.users_liked.all %}
+                <tr>
+                    <td> {{ x.first_name }} </td>
+                    <td> {{ x.last_name }} </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
+</body>
+</html>

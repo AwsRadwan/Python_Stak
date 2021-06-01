@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+        #log {
+            float: right;
+            text-align: right;
+        }
+        article {
+            display: flex;
+            padding: 20px;
+        }
+        section {
+            flex: 1;
+            padding: 20px;
+        }
+        body {
+            background-color: rgb(126, 103, 148);
+        }
+    </style>
+    <title>Books</title>
+</head>
+<body>
+    <header>
+        <h1>Welcome, {{ request.session.fname }} {{ request.session.lname }} <a id="log" href="/logout">Log Out</a> </h1>
+    </header>
+    <article>
+        <section>
+            <h3>Add Favorite Book</h3>
+            <form action="/books/add_book" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">Title</label>
+                    <input type="text" name="title" class="form-control" id="exampleFormControlInput1" placeholder="Title" required>
+                </div>
+                <div class="form-group">
+                    <label for="exampleTextarea">Description ..</label>
+                    <textarea class="form-control" name="desc" id="exampleTextarea" rows="2" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Add</button>
+            </form>
+        </section>
+        <section>
+            <h3>All Books</h3>
+            {% for x in books %}
+                <h5><a href="/books/show/{{x.id}}"> {{ x.title }} </a></h5>
+                <p>(add by {{ x.uploaded_by.first_name }} {{ x.uploaded_by.last_name }})</p>
+                {% if x in user.liked_books.all %}
+                    <p>This is one of your favorite</p>
+                {% else %}
+                    <p><a href="/add_fav/{{x.id}}">Add to your favorite</a></p>
+                {% endif %}
+            {% endfor %}
+        </section>
+    </article>
+</body>
+</html>
